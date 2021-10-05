@@ -1,0 +1,69 @@
+<h2>Template : básicos</h2>
+
+
+<div class="row">
+
+    <div class="col">
+        <!-- con el miformulario = ngform le digo que enlace mi formulario con el ngform  y posteriormente le mando por el boton guardar mi formulario -->
+        <form (ngSubmit)="guardar()" #miFormulario="ngForm" autocomplete="off">
+            <!-- campo de producto -->
+            <div class="mb-3 row">
+                <label for="producto" class="col-sm-3 col-form-label">Producto</label>
+                <div class="col-sm-9">
+                    <input type="text" name="producto" class="form-control" placeholder="Nombre producto" ngModel
+                        name="producto" required  minlength="3">
+                    <span  *ngIf="nombreValido()" class="form-text text-danger">Debe de ser de 3 letras</span>
+                </div>
+            </div>
+            <!-- campo de precio -->
+            <div class="mb-3 row">
+                <label for="precio" class="col-sm-3 col-form-label">Precio</label>
+                <div class="col-sm-9">
+                    <input type="number" name="precio" class="form-control" placeholder="Precio producto" ngModel
+                        name="precio" required>
+                    <!-- <span class="form-text text-danger">Debe de ser un numero</span> -->
+                </div>
+            </div>
+            <!-- Existencias del producto -->
+            <div class="mb-3 row">
+                <label for="existencias" class="col-sm-3 col-form-label">existencias</label>
+                <div class="col-sm-9">
+                    <input type="number" name="precio" class="form-control" placeholder="Existencias del  producto"
+                        ngModel name="existencias">
+                    <!-- <span class="form-text text-danger">Debe de ser un numero</span> -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary float-end">Guardar</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col">
+        <!-- el formulario ha sido validado correctamente -->
+        <span>Valid</span>
+        <pre>{{miFormulario.valid}}</pre>
+
+        <!-- el formulario internamente no se ha tocado desde que se le presento al usuario -->
+        <span>Pristine</span>
+        <pre>{{miFormulario.pristine}}</pre>
+
+        <!-- el usuario ha tocado el formulario -->
+        <span>Touched</span>
+        <pre>{{miFormulario.touched}}</pre>
+
+
+
+        <span>value</span>
+        <pre>{{miFormulario.value | json }}</pre>
+    </div>
+</div>

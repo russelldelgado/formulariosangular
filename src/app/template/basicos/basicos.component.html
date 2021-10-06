@@ -10,7 +10,7 @@
             <div class="mb-3 row">
                 <label for="producto" class="col-sm-3 col-form-label">Producto</label>
                 <div class="col-sm-9">
-                    <input type="text" name="producto" class="form-control" placeholder="Nombre producto" ngModel
+                    <input type="text" name="producto" class="form-control" placeholder="Nombre producto" [ngModel]="initForm.producto"
                         name="producto" required  minlength="3">
                     <span  *ngIf="nombreValido()" class="form-text text-danger">Debe de ser de 3 letras</span>
                 </div>
@@ -19,24 +19,26 @@
             <div class="mb-3 row">
                 <label for="precio" class="col-sm-3 col-form-label">Precio</label>
                 <div class="col-sm-9">
-                    <input type="number" name="precio" class="form-control" placeholder="Precio producto" ngModel
-                        name="precio" required>
-                    <!-- <span class="form-text text-danger">Debe de ser un numero</span> -->
+                    <input type="number" name="precio" class="form-control" placeholder="Precio producto" [ngModel]="initForm.precio"
+                        name="precio" required  >
+                    <span  *ngIf="precioValido()" class="form-text text-danger">Debe de ser un numero mayor o igual que cero</span> 
                 </div>
             </div>
             <!-- Existencias del producto -->
             <div class="mb-3 row">
                 <label for="existencias" class="col-sm-3 col-form-label">existencias</label>
                 <div class="col-sm-9">
+                    <!-- el customMin se lo pongo para indicarle a angular que es una directiva y cuando pase por aquí que se ejecute ,  tambien necesito el valor mínimo que le puedo pasar a este valor -->
+                    <!-- al principio nos saldra que min no es una propiedad conocida de typescrip , pero customMin le va a extender esta propiedad -->
                     <input type="number" name="precio" class="form-control" placeholder="Existencias del  producto"
-                        ngModel name="existencias">
+                        [ngModel]="initForm.existencias" name="existencias" customMin  [minimo]="0"  min="0"  required>
                     <!-- <span class="form-text text-danger">Debe de ser un numero</span> -->
                 </div>
             </div>
 
             <div class="row">
                 <div class="col">
-                    <button type="submit" class="btn btn-primary float-end">Guardar</button>
+                    <button  type="submit"  [disabled]="!miFormulario.valid" class="btn btn-primary float-end">Guardar</button>
                 </div>
             </div>
 

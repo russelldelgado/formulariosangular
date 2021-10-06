@@ -13,6 +13,13 @@ export class BasicosComponent implements OnInit {
 
   @ViewChild('miFormulario') miFormulario! : NgForm ;
 
+//esto lo utilizo para indicarle un valor inicial mediante en ngModel a mi formulario.
+  initForm ={
+    producto : "Calistenia",
+    precio : 0,
+    existencias : 0,
+  }
+
   constructor() { }
 
   ngOnInit(): void {
@@ -24,12 +31,23 @@ export class BasicosComponent implements OnInit {
      //"miFormulario.controls.producto?.invalid && miFormulario.controls.producto?.touched"
  
    }
+
+   precioValido(){
+    return   this.miFormulario?.controls.precio?.touched &&  (this.miFormulario?.controls.precio.value < 0  || this.miFormulario.controls.precio == null)
+   }
  
 
 
-  guardar( ){
-    console.log("guardar");
-    console.log(this.miFormulario);
+  guardar(){
+    //reset form() -> me sirve para reinicar os valores del formulario
+    console.log("posteo correcto");
+    //con esto puedo  reinicar mi formulario e indicar el valor de los campos una vez eliminado el producto
+    console.log(this.miFormulario.resetForm(
+      {
+        precio : 0,
+        existencias: 0
+      }
+    ));
   }
 
 }

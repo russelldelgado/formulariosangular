@@ -1,1 +1,70 @@
-<p>dinamicos works!</p>
+<h2>Reactivos : Dinámicos</h2>
+<hr>
+
+
+<form autocomplete="off"  [formGroup]="miFormulario" (ngSubmit)="guardar()" >
+
+
+    <!-- nombre -->
+    <div class="row mb-3 ">
+        <label for="" class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" placeholder="Nombre persona" formControlName="nombre"  >
+            <span class="form-text text-danger"  *ngIf="validar('nombre')"  >Este campo es obligatorio y debes introducir como mínimo 5
+                caracteres</span>
+        </div>
+    </div>
+
+    <!-- agregar  favorito-->
+    <div class="row mb-3 ">
+        <label for="" class="col-sm-3 col-form-label">Agregar</label>
+        <div class="col-sm-9">
+
+            <div class="input-group">
+                <!-- (keyup.enter)="hola()" -->
+                <input type="text" class="form-control" placeholder="Agregar favorito" 
+                    name="nuevoJuego" [formControl]="nuevoFavorito"  (keyup.enter)="agregarFavorito()" >
+                <button class="btn btn-outline-primary"   type="button" (click)="agregarFavorito()"  >Agregar</button>
+            </div>  
+        </div>
+    </div>
+
+    <!-- lista juegos agregados --> 
+     <div class="row mb-3 ">
+        <label for="" class="col-sm-3 col-form-label"  >Favoritos</label>
+        <div class="col-sm-9" formArrayName=favoritos >
+
+            <div class="input-group mb-1" *ngFor="let item of  favoritosArr.controls ; let i = index" > 
+                <input type="text" class="form-control"  [formControlName]="i" >
+                <button class="btn btn-outline-danger" type="button" (click)="borrar(i)"  >Eliminar</button>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button"  (click)="guardar()" class="btn btn-primary  float-end"> Guardar </button>
+        </div>
+    </div>
+
+
+</form>
+
+
+<span>mi formulario</span>
+<pre>{{miFormulario.value| json}}</pre> 
+
+
+<span>valid</span>
+<pre>{{miFormulario.valid| json}}</pre> 
+
+
+
+
+<span>NUEVO FAVORITO valid</span>
+<pre>{{nuevoFavorito.valid}}</pre> 
+
+
